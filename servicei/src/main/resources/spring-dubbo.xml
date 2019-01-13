@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <!-- 生产者的名字 -->
+    <dubbo:application name="mengchaob-provider"/>
+    <!-- 注册服务器的地址及类型 -->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <!-- name选择的协议，port消费者远程调用生产者时访问的端口(生产者服务器所在的端口) -->
+    <dubbo:protocol name="dubbo" port="20880"/>
+    <!-- 注册实现类，这个是将来消费者远程调用时执行方法的实例 -->
+    <bean id="commonApiImpl" class="com.mengchaob.dubbo.producer.servicei.CommonApiImpl"/>
+    <!-- 注册接口 -->
+    <dubbo:service interface="com.mengchaob.dubbo.producer.service.CommonApi" ref="commonApiImpl"/>
+</beans>
